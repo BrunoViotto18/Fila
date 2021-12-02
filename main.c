@@ -54,8 +54,7 @@ int menu(void)
     printf("2. Exibir fila\n");
     printf("3. Adicionar Elemento na Fila\n");
     printf("4. Retirar Elemento da Fila\n");
-    printf("Opcao: \n");
-    scanf("%d", &opt);
+    printf("Opcao: \n"); scanf("%d", &opt);
     return opt;
 }
 
@@ -105,7 +104,52 @@ void inicia(node *FILA)
 
 int vazia(node *FILA)
 {
+    if (FILA->prox == NULL)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
 
+node *aloca()
+{
+    node *novo = (node*) malloc(sizeof(node));
+
+    if (!novo)
+    {
+        printf("Sem memória disponível!\n");
+        exit(1);
+    }
+    else
+    {
+        printf("Novo elemento: "); scanf("%d", &novo->num);
+        return novo;
+    }
+}
+
+void insere(node *FILA)
+{
+    node *novo = aloca();
+    novo->prox = NULL;
+
+    if (vazia(FILA))
+    {
+        FILA->prox = novo;
+    }
+    else
+    {
+        node *tmp = FILA->prox;
+
+        while (tmp->prox != NULL)
+        {
+            tmp = tmp->prox;
+        }
+
+        tmp->prox = novo;
+    }
 }
 
 
