@@ -86,7 +86,7 @@ void opcao(node *FILA, int op)
             if (tmp != NULL)
             {
                 printf("Retirado: %3d\n\n", tmp->num);
-                libera(tmp);
+                free(tmp);
             }
             break;
 
@@ -150,6 +150,66 @@ void insere(node *FILA)
 
         tmp->prox = novo;
     }
+    tam++;
 }
 
+node *retira(node *FILA)
+{
+    if (FILA->prox == NULL)
+    {
+        printf("Fila já está vazia\n");
+        return NULL;
+    }
+    node *tmp = FILA->prox;
+    FILA->prox = tmp->prox;
+    tam--;
+    return tmp;
+}
 
+void exibe(node *FILA)
+{
+    if (vazia(FILA))
+    {
+        printf("Fila vazia!\n\n");
+        return;
+    }
+    node *tmp;
+    tmp = FILA->prox;
+    printf("Fila : ");
+    while (tmp != NULL)
+    {
+        printf("%5d", tmp->num);
+        tmp = tmp->prox;
+    }
+    printf("\n ");
+
+    printf("      ");
+    int count;
+    for (count = 0; count < tam; count++)
+    {
+        printf("%5c", '^');
+        //printf(" ^ ");
+    }
+
+    printf("\nOrdem: ");
+    for (count = 0; count < tam; count++)
+    {
+        printf("%5d", count);
+    }
+    printf("\n\n");
+}
+
+void libera(node *FILA)
+{
+    if (!vazia(FILA))
+    {
+        node *proxNode, *atual;
+        atual = FILA->prox;
+        while (atual != NULL)
+        {
+            proxNode = atual->prox;
+            free(atual);
+            atual = proxNode;
+        }
+    }
+}

@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1638801488 source:c:\users\aluno\desktop\fila\filachar\main.c
+	<stdio.h>
+	<stdlib.h>
+
